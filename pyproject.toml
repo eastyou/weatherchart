@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "weatherchart"
+version = "0.1.0"
+description = "天气记录：CSV 校验、统计汇总、柱状图与折线图报告"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "eastyou" }]
+keywords = ["education", "weather", "data", "chart"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.scripts]
+weatherchart = "weatherchart.cli:main"
+
+[tool.setuptools]
+packages = ["weatherchart"]
