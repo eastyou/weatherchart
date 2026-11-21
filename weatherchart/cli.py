@@ -93,7 +93,20 @@ def _run(args: argparse.Namespace) -> int:
     raise ValueError("未知命令：%s" % args.command)
 
 
+def _ensure_utf8_console() -> None:
+    """Windows 控制台默认编码可能无法输出中文，尽量切换为 UTF-8。"""
+    for stream in (sys.stdout, sys.stderr):
+        reconfigure = getattr(stream, "reconfigure", None)
+        if reconfigure is None:
+            continue
+        try:
+            reconfigure(encoding="utf-8", errors="replace")
+        except (ValueError, OSError):
+            continue
+
+
 def main(argv: Optional[Sequence[str]] = None) -> int:
+    _ensure_utf8_console()
     parser = build_parser()
     args = parser.parse_args(argv)
     try:
